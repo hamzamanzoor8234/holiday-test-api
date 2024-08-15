@@ -25,7 +25,7 @@ router.get("/holidays", async (req: Request, res: Response) => {
       parseInt(year as string, 10)
     );
     if (response.meta.code === 200) {
-      holidays = response.response.holidays;
+      holidays = (response.response.holidays||[]);
       await setCache(cacheKey, holidays, config.cacheTTL);
       res.json({ holidays });
     } else {
